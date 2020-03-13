@@ -1,0 +1,127 @@
+<section class="property-binding">
+    <article>
+        <h3>Interpolacao</h3>
+        <p>clique para acessar: <a href="{{url}}">{{url}}</a></p>
+        <p>Resultado 1 + 1 = {{ 1 + 1 }}</p>
+        <p>Resultado 1 + 1 nao eh= {{ 1 + 1 + getValor()}}</p>
+        <p>Curso angular e curtir curso: {{ cursoAngular && getCurtirCurso() }}</p>
+        <p>[textContent]=cursoAngular</p>
+        
+
+    </article>
+
+    <article>
+        <!-- sem property biding -->
+        <!-- <img src="{{img_url}}"> -->
+        <!-- com property biding -->
+        <!-- <img [src]="img_url"> -->
+        <!-- com property biding -->
+        <!-- <img bind-src="img_url"> -->
+    </article>
+
+    <article>
+        <h3>Class e Style Binding</h3>
+        <div class="">Seleciona um item:
+            <select name="" id="" #item (change)="0">
+                <option value="alert-success">Sucesso</option>
+                <option value="alert-info">Info</option>
+                <option value="alert-warning">Warning</option>
+                <option value="alert-danger">Danger</option>
+            </select>
+            <br><br>
+            <div class="alert-secondary" role="alert" [class]="item.value ? item.value : null">
+                item bind com o item do select
+              </div>
+            <div class="alert alert-primary" role="alert" [class.alert-success]="item.value == 'alert-sucesso' " >
+                item bind com condicional
+              </div>
+              <div class="alert {{item.value}}" role="alert">
+                item bind com o item do select
+              </div>
+              <div class="alert alert-danger" role="alert" 
+                [style.display]="item.value == 'alert-danger' ? 'block' : 'none'" >
+                item bind com style e condicional
+              </div>
+        </div>
+    </article>
+
+    <article>
+      <h3>
+        Event Binding
+      </h3>
+      <div>
+        <button 
+          class="btn btn-primary"
+          (click)="clickedButton()"
+        >Click me</button>
+
+        <input 
+          type="text" 
+          (keyup)="onKeyUp($event)"
+          (keyup.enter)="salvarValor($event.target.value)"
+          (blur)="salvarValorBlur(input.value)"
+          #input
+        /> 
+
+        <p>Valor Atual: {{valor_atual}}</p>
+        <p>Valor Salvo: {{valor_salvo}}</p>
+        <p>Valor pelo blur Salvo: {{valor_salvo_blur}}</p>
+
+        
+        <span
+          (mouseover)="onMouseOverOut()"
+          (mouseout)="onMouseOverOut()"
+          [class.highlight] = "is_mouse_over == true"
+          
+        >  
+          passa o mouse
+        </span
+        >
+      </div>
+    </article>
+</section>
+
+<section>
+  <article>
+    <h3>
+      Two-way data-biding
+    </h3>
+    <div>
+      <span>input -> variable</span>
+      <input type="text" name="" id="" 
+        [value]="nome"
+        (input)="nome = $event.target.value"
+      />
+
+      <input type="text" name="" id="" 
+        [(ngModel)]="nome"
+      />
+
+      <p>Voce digitou o nome: {{nome}}</p>
+    </div>
+
+    <div>
+      <span>input -> objs </span>
+      <input type="text" name="" id=""
+        [(ngModel)]="pessoa.nome"
+      />
+      <input type="text" name="" id=""
+        [(ngModel)]="pessoa.idade"
+      />
+
+      <p>Nome: {{pessoa.nome}} || idade: {{pessoa.idade}}</p>
+    </div>
+  </article>
+</section>
+
+<section class="input-output-properties">
+  <article>
+    <h3>Input/Output Properties</h3>
+    <app-curso [nome_curso]="nome_do_curso"></app-curso>
+    <contador 
+      [value]="initial_value"
+      (change_value)="onChangeValue($event)"
+
+    ></contador>
+  </article>
+</section>
